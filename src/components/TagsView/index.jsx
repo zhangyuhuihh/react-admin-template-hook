@@ -61,6 +61,7 @@ class TagsView extends React.Component {
   }
 
   handleRemoveTag = (e, item) => {
+    const { pathname } = this.props.history.location
     e.stopPropagation()
     const { removeVisitiedViews, visitiedViews } = this.props
     removeVisitiedViews(item)
@@ -69,7 +70,7 @@ class TagsView extends React.Component {
       return
     }
     for (let i = 0; i < visitiedViews.length; i++) {
-      if (visitiedViews[i].path === item.path) {
+      if (visitiedViews[i].path === item.path && item.path === pathname) {
         if (i === visitiedViews.length - 1) {
           this.props.history.push({
             pathname: visitiedViews[i - 1].path,
