@@ -28,7 +28,7 @@ interface Pps {
   children: React.ReactNode
   renderValue?: (v: SimpleEdit) => React.ReactNode | string
   value?: SimpleEdit
-  onConfirm?: (v: SimpleEdit) => void
+  onConfirm?: (v: SimpleEdit) => Promise<any>
 }
 
 function MainComp(props: Pps) {
@@ -44,7 +44,7 @@ function MainComp(props: Pps) {
   const handleConfirm = async () => {
     try {
       if (onConfirm) {
-        onConfirm(currentValue)
+        await onConfirm(currentValue)
         seteditStatus('normal')
       }
     } catch (error) {
